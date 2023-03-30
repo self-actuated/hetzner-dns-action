@@ -1,6 +1,6 @@
 # Copyright (c) 2022 OpenFaaS Ltd
 name: 'hetzner-dns-action'
-description: 'Setup Hetzner\'s DNS server for systemd.'
+description: 'Setup the internal DNS server for Hetzner.'
 branding:
   icon: 'arrow-right-circle'
   color: 'gray-dark'
@@ -13,22 +13,23 @@ inputs:
 runs:
     using: 'composite'
     steps:
-      - name: Setup resolv.conf
-        shell: bash
-        id: setup-config
-        env:
-          DNS: ${{ inputs.dns }}
-        run: |
-          cat <<EOF | sudo tee /etc/systemd/resolved.conf
-          DNS=$DNS
-          EOF
-      - name: Reload DNS
-        shell: bash
-        id: reload-dns-config
-          sudo systemctl daemon-reload
-          sudo systemctl restart systemd-resolved.service
-      - name: Debug DNS settings
-        shell: bash
-        id: show-settings
-        run: |
-          systemd-resolve --status --no-pager
+    - name: Setup resolv.conf
+      shell: bash
+      id: setup-config
+      env:
+        DNS: ${{ inputs.dns }}
+      run: |
+         cat <<EOF | sudo tee /etc/systemd/resolved.conf
+         DNS=$DNS
+         EOF
+    - name: Reload DNS
+      shell: bash
+      id: reload-dns-config
+      run: |
+         sudo systemctl daemon-reload
+         sudo systemctl restart systemd-resolved.service
+    - name: Debug DNS settings
+      shell: bash
+      id: show-settings
+      run: |
+        systemd-resolve --status --no-pager
