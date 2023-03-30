@@ -19,10 +19,10 @@ runs:
       env:
         DNS: ${{ inputs.dns }}
       run: |
-         cat <<EOF | sudo tee /etc/systemd/resolved.conf
-         [Resolve]
-         DNS=$DNS
-         EOF
+         echo "[Resolve]" | sudo tee /etc/systemd/resolved.conf
+         echo "DNS=$DNS" | sudo tee -a /etc/systemd/resolved.conf
+         
+         cat /etc/systemd/resolved.conf
     - name: Reload DNS
       shell: bash
       id: reload-dns-config
