@@ -19,13 +19,16 @@ runs:
         env:
           DNS: ${{ inputs.dns }}
         run: |
-           cat <<EOF | sudo tee /etc/systemd/resolved.conf
-           DNS=$DNS
-           EOF
+          cat <<EOF | sudo tee /etc/systemd/resolved.conf
+          DNS=$DNS
+          EOF
+      - name: Reload DNS
+        shell: bash
+        id: reload-dns-config
           sudo systemctl daemon-reload
           sudo systemctl restart systemd-resolved.service
       - name: Debug DNS settings
         shell: bash
         id: show-settings
         run: |
-           systemd-resolve --status --no-pager
+          systemd-resolve --status --no-pager

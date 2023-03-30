@@ -6,8 +6,7 @@ Usage:
 
 ```yaml
 steps:
-  - name: Setup DNS
-    uses: self-actuated/hetzner-dns-action@master
+    - uses: self-actuated/hetzner-dns-action@master
 ```
 
 With an overridden DNS entry:
