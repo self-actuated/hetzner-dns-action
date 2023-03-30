@@ -1,6 +1,6 @@
 # hetzner-dns-action
 
-Setup Hetzner's DNS server for systemd.
+Setup Hetzner's DNS server for systemd on an Ubuntu 20.04 or 22.04 host.
 
 Usage:
 
