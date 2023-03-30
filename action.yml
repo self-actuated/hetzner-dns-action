@@ -1,6 +1,6 @@
 # Copyright (c) 2022 OpenFaaS Ltd
 name: 'hetzner-dns-action'
-description: 'Setup Hetzner's DNS server for systemd.'
+description: 'Setup Hetzner\'s DNS server for systemd.'
 branding:
   icon: 'arrow-right-circle'
   color: 'gray-dark'
