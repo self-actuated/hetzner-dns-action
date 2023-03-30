@@ -20,6 +20,7 @@ runs:
         DNS: ${{ inputs.dns }}
       run: |
          cat <<EOF | sudo tee /etc/systemd/resolved.conf
+         [Resolve]
          DNS=$DNS
          EOF
     - name: Reload DNS
